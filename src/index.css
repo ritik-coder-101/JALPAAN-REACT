@@ -1,3 +1,70 @@
+/* index.css */
+@import "../node_modules/slick-carousel/slick/slick.css";
+@import "../node_modules/slick-carousel/slick/slick-theme.css";
+
+
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: #ffffff;
+  padding: 15px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.navbar li {
+  margin: 0 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+
+/* Section styling */
+.section {
+  height: auto; /* Full height sections */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+#home {
+  padding-top: 5vh;
+  background-color: #ffffff;
+}
+
+#menu {
+  background-color: #ffffff;
+}
+
+#mobile-app {
+  background-color: #ffffff;
+}
+
+#contact-us {
+  background-color: #101010;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

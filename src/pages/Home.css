@@ -1,0 +1,196 @@
+/* Home.css */
+
+/* Container for the whole home section */
+.home-container {
+    width: 90vw; /* 90% of the viewport width */
+    margin: 20px auto; /* Center the content */
+    position: relative; /* For absolute positioning of text */
+  }
+  
+  /* Slideshow container styles */
+  .slideshow-container {
+    position: relative; /* Ensure that the text is positioned relative to this container */
+    width: 100%; /* The slideshow takes 100% of its parent's width */
+    height: 80vh; /* 50% of the viewport height */
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  
+.text-overlay {
+  position: absolute;
+  top: 20%;
+  z-index: 2;
+  color: white;
+  text-align: left;
+  z-index: 1;
+  padding: 1rem;
+  width: 80%;
+  opacity: 0; /* Initially hidden */
+  animation: popIn 2s ease-in forwards; /* Apply animation */
+}
+
+/* Keyframes for Pop-in Animation */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+  /* Large heading styling for "ORDER YOUR" */
+  .text-overlay h1 {
+    font-size: 56px; /* Large font size */
+    font-weight: bold;
+    margin-bottom: 5px; /* Decreased gap between h1 and h2 */
+  }
+  
+  /* Smaller heading styling for "Favourite food here" */
+  .text-overlay h2 {
+    font-size: 56px; /* Same font size as h1 */
+    font-weight: normal;
+    margin-top: 0; /* Remove margin top to reduce gap from h1 */
+    margin-bottom: 20px; /* Keep some space below */
+  }
+  
+  /* Description text styling */
+  .text-overlay p {
+    font-size: 32px; /* Font size for description */
+    color: rgba(255, 255, 255, 1); /* Slightly transparent white for readability */
+    line-height: 1.6;
+    max-width: 100%; /* Ensure text takes full width available */
+    margin: 0; /* Remove any margin */
+  }
+  
+  /* Image styling */
+  .slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the box */
+  }
+  
+  /* Slick dots */
+  .slick-dots {
+    position: absolute;
+    top: 10px; /* Position dots above the image */
+    width: 100%; /* Center the dots horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure dots are above the image but below the text */
+  }
+  
+  .slick-dots li button:before {
+    font-size: 12px; /* Size of the dots */
+    color: white; /* Dot color */
+    opacity: 0.8;
+  }
+  
+  .slick-dots li.slick-active button:before {
+    color: #ff6347; /* Active dot color (tomato) *//* Home Page Container */
+    .home-container {
+      width: 100%;
+      padding: 2rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #f9f9f9;
+    }
+    
+    /* Slideshow Container */
+    .slideshow-container {
+      position: relative;
+      width: 90vw; /* Increased width */
+      height: 80vh; /* Adjusted height */
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Text Overlay */
+    .text-overlay {
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      z-index: 2;
+      color: white;
+      text-align: left;
+      padding: 1rem;
+      max-width: 50%;
+    }
+    
+    .heading-large {
+      font-size: 64px;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    .heading-medium {
+      font-size: 64px;
+      margin-bottom: 1rem;
+    }
+    
+    .description {
+      font-size: 32px;
+      line-height: 1.5;
+    }
+    
+    /* Slider Images */
+    .slider {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .slide-img {
+      width: 100%;
+      height: 100%; /* Ensures the image fills the container */
+      object-fit: cover; /* Ensures the image covers the container without distortion */
+      display: block;
+    }
+    
+    /* Dots Customization */
+    .slick-dots {
+      bottom: 15px;
+    }
+    
+    .slick-dots li button:before {
+      font-size: 12px;
+      color: white;
+    }
+    
+    .slick-dots li.slick-active button:before {
+      color: #ff6347; /* Highlight color for active dot */
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .text-overlay {
+        top: 5%;
+        left: 2%;
+        max-width: 70%;
+      }
+    
+      .heading-large,
+      .heading-medium {
+        font-size: 48px;
+      }
+    
+      .description {
+        font-size: 20px;
+      }
+    }
+    
+    opacity: 1;
+  }
+  
+  /* Optional: Add a shadow for better visual effect */
+  .slideshow-container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  

@@ -1,0 +1,82 @@
+/* Basic styles for the container */
+.contact-us-container {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Heading and description styles */
+  .contact-heading {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .contact-description {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Info sections (COMPANY, GET IN TOUCH) in a row */
+  .info-sections {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  /* Styles for individual section headings */
+  .section-heading {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .company-links {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+  }
+  
+  .company-links li {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  /* Contact info section styles */
+  .contact-info-section p {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  /* Image section styles */
+  .image-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adds gap between images */
+    margin-top: 40px;
+  }
+  
+  .contact-image {
+    width: 30px; /* Set width */
+    height: 30px; /* Set height */
+    border-radius: 50%;  /* Rounded images */
+    object-fit: cover;
+  }
+  
+  /* Separator line */
+  .separator {
+    border: 0;
+    height: 1px;
+    background-color: #fff;
+    margin: 40px 0;
+  }
+  
+  /* Copyright section styles */
+  .copyright {
+    text-align: center;
+    font-size: 14px;
+  }
+  

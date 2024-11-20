@@ -1,0 +1,42 @@
+/* Main container to center everything */
+.mobile-app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    padding: 20px;
+    text-align: center; /* Center text */
+  }
+  
+  /* Styling for the main text */
+  .app-text {
+    font-size: 54px;  /* Updated font size */
+    font-weight: bold;  /* Make it bold */
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  /* Styling for the subtext (Fusion Foods App) */
+  .app-subtext {
+    font-size: 54px;  /* Updated font size */
+    font-weight: bold;  /* Make it bold */
+    margin-top: 10px;  /* Reduced top margin to decrease the gap */
+    color: #333;
+  }
+  
+  /* Container for the images */
+  .images-container {
+    display: flex;
+    justify-content: center; /* Align images horizontally */
+    gap: 50px; /* 50px gap between images */
+    width: 100%; /* Full width to ensure images are spaced properly */
+  }
+  
+  /* Image styling */
+  .app-image {
+    width: 150px;  /* Set a fixed width for uniformity */
+    height: 50px; /* Set a fixed height for uniformity */
+    object-fit: cover; /* Ensures images are not stretched but maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+  }
+  

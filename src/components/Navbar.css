@@ -1,0 +1,33 @@
+.navbar {
+    background-color: white;
+    height: 80px;
+    padding: 0  1rem;
+    display: flex;            /* Use flexbox for alignment */
+    justify-content: space-between; /* Keeps the logo on the left and links spaced properly */
+    align-items: center;      /* Centers items vertically within the navbar */
+  }
+  
+  .navbar-logo {
+    color: rgb(11, 11, 11);
+    font-size: 1.8rem;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;  /* Center the links horizontally */
+    gap: 1.5rem;              /* Adds space between the links */
+    flex-grow: 1;             /* Allows the links to occupy space between logo and right side */
+    margin-left: -15vw;
+  }
+  
+  .navbar-links a {
+    color: rgb(7, 7, 7);
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  
+  .navbar-links a:hover {
+    text-decoration: underline;
+  }
+  
