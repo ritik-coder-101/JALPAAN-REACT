@@ -49,6 +49,28 @@ const Menu = () => {
   ];
 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [dishCounts, setDishCounts] = useState({}); // To track counts per dish
+
+  const handleAddButton = (id) => {
+    setDishCounts((prevCounts) => ({
+      ...prevCounts,
+      [id]: (prevCounts[id] || 0) + 1,
+    }));
+  };
+
+  const handleIncrement = (id) => {
+    setDishCounts((prevCounts) => ({
+      ...prevCounts,
+      [id]: (prevCounts[id] || 0) + 1,
+    }));
+  };
+
+  const handleDecrement = (id) => {
+    setDishCounts((prevCounts) => ({
+      ...prevCounts,
+      [id]: Math.max((prevCounts[id] || 0) - 1, 0),
+    }));
+  };
 
   const filteredDishes =
     selectedCategory === "All"
@@ -92,7 +114,30 @@ const Menu = () => {
           <div key={dish.id} className="dish-item">
             <div className="dish-box">
               <img src={dish.image} alt={dish.name} className="dish-img" />
-              <button className="dish-button">+</button>
+              {!dishCounts[dish.id] ? (
+                <button
+                  className="dish-button"
+                  onClick={() => handleAddButton(dish.id)}
+                >
+                  +
+                </button>
+              ) : (
+                <div className="dish-counter">
+                  <button
+                    className="counter-btn"
+                    onClick={() => handleDecrement(dish.id)}
+                  >
+                    -
+                  </button>
+                  <span className="dish-count">{dishCounts[dish.id]}</span>
+                  <button
+                    className="counter-btn"
+                    onClick={() => handleIncrement(dish.id)}
+                  >
+                    +
+                  </button>
+                </div>
+              )}
             </div>
             <p className="dish-name">{dish.name}</p>
             <p className="dish-price">₹{dish.price}</p>

@@ -19,58 +19,65 @@ const Navbar = () => {
     terms: false,
   });
 
+  // Toggle modal visibility
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
-    setIsLoginForm(false);
     resetForm();
+    setIsLoginForm(false); // Default to Sign In form
   };
 
+  // Reset all form inputs and errors
   const resetForm = () => {
     setFormValues({ name: '', email: '', password: '', terms: false });
     setLoginValues({ email: '', password: '', terms: false });
     setFormErrors({});
   };
 
+  // Handle input changes for both forms
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (isLoginForm) {
-      setLoginValues({
-        ...loginValues,
-        [name]: type === 'checkbox' ? checked : value,
-      });
-    } else {
-      setFormValues({
-        ...formValues,
-        [name]: type === 'checkbox' ? checked : value,
-      });
-    }
+    const updateValues = isLoginForm ? loginValues : formValues;
+    const setValues = isLoginForm ? setLoginValues : setFormValues;
+
+    setValues({
+      ...updateValues,
+      [name]: type === 'checkbox' ? checked : value,
+    });
   };
 
+  // Validate Sign In form
   const validateSignInForm = () => {
     const errors = {};
-    if (!formValues.name) errors.name = 'Name is required';
-    if (!formValues.email) errors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formValues.email))
+    if (!formValues.name.trim()) errors.name = 'Name is required';
+    if (!formValues.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
       errors.email = 'Enter a valid email';
-    if (!formValues.password) errors.password = 'Password is required';
+    }
+    if (!formValues.password.trim()) errors.password = 'Password is required';
     if (!formValues.terms) errors.terms = 'You must agree to the terms';
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
+  // Validate Login form
   const validateLoginForm = () => {
     const errors = {};
-    if (!loginValues.email) errors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(loginValues.email))
+    if (!loginValues.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(loginValues.email)) {
       errors.email = 'Enter a valid email';
-    if (!loginValues.password) errors.password = 'Password is required';
+    }
+    if (!loginValues.password.trim()) errors.password = 'Password is required';
     if (!loginValues.terms) errors.terms = 'You must agree to the terms';
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (isLoginForm) {
       if (validateLoginForm()) {
         alert('Login successful!');
@@ -84,11 +91,13 @@ const Navbar = () => {
     }
   };
 
+  // Switch to Login form
   const showLoginForm = () => {
     setIsLoginForm(true);
     resetForm();
   };
 
+  // Switch to Sign In form
   const showSignInForm = () => {
     setIsLoginForm(false);
     resetForm();
@@ -96,6 +105,7 @@ const Navbar = () => {
 
   return (
     <div className="container">
+      {/* Navbar */}
       <nav className="navbar">
         <h1 className="navbar-logo">JALPAAN</h1>
         <ul className="navbar-links">
@@ -106,19 +116,20 @@ const Navbar = () => {
         </ul>
         <div className="navbar-actions">
           <img src="/images/cart.jpg" alt="Cart" className="cart-icon" />
-          <button className="signin-btn" onClick={toggleModal}>
-            Sign In
-          </button>
+          <button className="signin-btn" onClick={toggleModal}>Sign In</button>
         </div>
       </nav>
 
+      {/* Modal */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
             <form onSubmit={handleSubmit} className="modal-form">
-              {!isLoginForm ? (
+              <h2 className="modal-title">{isLoginForm ? 'Login' : 'Sign In'}</h2>
+
+              {/* Form Inputs */}
+              {!isLoginForm && (
                 <>
-                  <h2 className="modal-title">Sign In</h2>
                   <input
                     type="text"
                     name="name"
@@ -128,87 +139,59 @@ const Navbar = () => {
                     className="modal-input"
                   />
                   {formErrors.name && <p className="error-text">{formErrors.name}</p>}
-                  <input
-                    type="email"
-                    name="email"
-                    value={formValues.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email"
-                    className="modal-input"
-                  />
-                  {formErrors.email && <p className="error-text">{formErrors.email}</p>}
-                  <input
-                    type="password"
-                    name="password"
-                    value={formValues.password}
-                    onChange={handleInputChange}
-                    placeholder="Enter your password"
-                    className="modal-input"
-                  />
-                  {formErrors.password && (
-                    <p className="error-text">{formErrors.password}</p>
-                  )}
-                  <div className="checkbox-container">
-                    <input
-                      type="checkbox"
-                      name="terms"
-                      checked={formValues.terms}
-                      onChange={handleInputChange}
-                      id="terms"
-                    />
-                    <label htmlFor="terms">I agree to the <span>Terms and Conditions</span>.</label>
-                  </div>
-                  {formErrors.terms && <p className="error-text">{formErrors.terms}</p>}
-                  <button type="submit" className="modal-btn">Create Account</button>
-                  <p className="modal-login">
-                    Already have an account?{' '}
-                    <span onClick={showLoginForm}>Login here</span>
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h2 className="modal-title">Login</h2>
-                  <input
-                    type="email"
-                    name="email"
-                    value={loginValues.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your email"
-                    className="modal-input"
-                  />
-                  {formErrors.email && <p className="error-text">{formErrors.email}</p>}
-                  <input
-                    type="password"
-                    name="password"
-                    value={loginValues.password}
-                    onChange={handleInputChange}
-                    placeholder="Enter your password"
-                    className="modal-input"
-                  />
-                  {formErrors.password && (
-                    <p className="error-text">{formErrors.password}</p>
-                  )}
-                  <button type="submit" className="modal-btn">Login</button>
-                  <div className="checkbox-container">
-                    <input
-                      type="checkbox"
-                      name="terms"
-                      checked={loginValues.terms}
-                      onChange={handleInputChange}
-                      id="login-terms"
-                    />
-                    <label htmlFor="login-terms">
-                      I agree to the <span>Terms and Conditions</span>.
-                    </label>
-                  </div>
-                  {formErrors.terms && <p className="error-text">{formErrors.terms}</p>}
-                  <p className="modal-login">
-                    Create a new account?{' '}
-                    <span onClick={showSignInForm}>Click here</span>
-                  </p>
                 </>
               )}
+              <input
+                type="email"
+                name="email"
+                value={isLoginForm ? loginValues.email : formValues.email}
+                onChange={handleInputChange}
+                placeholder="Enter your email"
+                className="modal-input"
+              />
+              {formErrors.email && <p className="error-text">{formErrors.email}</p>}
+              <input
+                type="password"
+                name="password"
+                value={isLoginForm ? loginValues.password : formValues.password}
+                onChange={handleInputChange}
+                placeholder="Enter your password"
+                className="modal-input"
+              />
+              {formErrors.password && <p className="error-text">{formErrors.password}</p>}
+
+              {/* Terms & Conditions */}
+              <div className="checkbox-container">
+                <input
+                  type="checkbox"
+                  name="terms"
+                  checked={isLoginForm ? loginValues.terms : formValues.terms}
+                  onChange={handleInputChange}
+                  id="terms"
+                />
+                <label htmlFor="terms">
+                  I agree to the <span>Terms and Conditions</span>.
+                </label>
+              </div>
+              {formErrors.terms && <p className="error-text">{formErrors.terms}</p>}
+
+              {/* Submit Button */}
+              <button type="submit" className="modal-btn">
+                {isLoginForm ? 'Login' : 'Create Account'}
+              </button>
+
+              {/* Toggle Form Link */}
+              <p className="modal-login">
+                {isLoginForm
+                  ? "Create a new account? "
+                  : "Already have an account? "}
+                <span onClick={isLoginForm ? showSignInForm : showLoginForm}>
+                  {isLoginForm ? 'Sign In' : 'Login'} here
+                </span>
+              </p>
             </form>
+
+            {/* Close Button */}
             <button className="close-modal-btn" onClick={toggleModal}>
               ×
             </button>
