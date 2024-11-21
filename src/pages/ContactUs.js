@@ -4,7 +4,6 @@ import './ContactUs.css';
 const ContactUs = () => {
   return (
     <div className="contact-us-container">
-      {/* Fusion Foods Section */}
       <div className="contact-us-section">
         <h1 className="contact-heading">JALPAAN</h1>
         <p className="contact-description">
@@ -12,7 +11,6 @@ const ContactUs = () => {
         </p>
       </div>
 
-      {/* Company and Get in Touch Sections */}
       <div className="info-sections">
         <div className="company-section">
           <h2 className="section-heading">COMPANY</h2>
@@ -31,17 +29,14 @@ const ContactUs = () => {
         </div>
       </div>
 
-      {/* Images Section */}
       <div className="image-section">
         <img src="/images/face.png" alt="Image 1" className="contact-image" />
         <img src="/images/twitter.jpg" alt="Image 2" className="contact-image" />
         <img src="/images/linkedin.jpg" alt="Image 3" className="contact-image" />
       </div>
 
-      {/* Horizontal Line */}
       <hr className="separator" />
 
-      {/* Copyright Text */}
       <div className="copyright">
         <p>Copyright 2024 © Tomato.com - All Right Reserved.</p>
       </div>

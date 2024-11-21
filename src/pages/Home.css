@@ -2,16 +2,16 @@
 
 /* Container for the whole home section */
 .home-container {
-    width: 90vw; /* 90% of the viewport width */
-    margin: 20px auto; /* Center the content */
-    position: relative; /* For absolute positioning of text */
+    width: 90vw;
+    margin: 20px auto; 
+    position: relative;
   }
   
   /* Slideshow container styles */
   .slideshow-container {
-    position: relative; /* Ensure that the text is positioned relative to this container */
-    width: 100%; /* The slideshow takes 100% of its parent's width */
-    height: 80vh; /* 50% of the viewport height */
+    position: relative; 
+    width: 100%;
+    height: 80vh;
     border-radius: 20px;
     overflow: hidden;
   }

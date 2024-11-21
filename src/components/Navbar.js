@@ -6,6 +6,39 @@ import './Modal.css';
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoginForm, setIsLoginForm] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([
+    {
+      id: 1,
+      image: '/images/pizza1.jpg',
+      title: 'Pizza',
+      price: 200,
+      quantity: 1,
+    },
+    {
+      id: 2,
+      image: '/images/burger1.jpg',
+      title: 'Burger',
+      price: 100,
+      quantity: 2,
+    },
+  ]);
+
+  // Function to remove an item from the cart
+  const removeItem = (id) => {
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  };
+
+  // Cart totals
+  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const deliveryCharges = 50;
+  const grandTotal = subtotal + deliveryCharges;
+
+  // Function to toggle cart visibility
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+  
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -13,63 +46,41 @@ const Navbar = () => {
     terms: false,
   });
   const [formErrors, setFormErrors] = useState({});
-  const [loginValues, setLoginValues] = useState({
-    email: '',
-    password: '',
-    terms: false,
-  });
 
   // Toggle modal visibility
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
     resetForm();
-    setIsLoginForm(false); // Default to Sign In form
+    setIsLoginForm(false);
   };
 
   // Reset all form inputs and errors
   const resetForm = () => {
     setFormValues({ name: '', email: '', password: '', terms: false });
-    setLoginValues({ email: '', password: '', terms: false });
     setFormErrors({});
   };
 
-  // Handle input changes for both forms
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const updateValues = isLoginForm ? loginValues : formValues;
-    const setValues = isLoginForm ? setLoginValues : setFormValues;
-
-    setValues({
-      ...updateValues,
+    setFormValues({
+      ...formValues,
       [name]: type === 'checkbox' ? checked : value,
     });
   };
+  
 
-  // Validate Sign In form
-  const validateSignInForm = () => {
+  // Validate form
+  const validateForm = () => {
     const errors = {};
-    if (!formValues.name.trim()) errors.name = 'Name is required';
+    if (!isLoginForm && !formValues.name.trim()) errors.name = 'Name is required.';
     if (!formValues.email.trim()) {
-      errors.email = 'Email is required';
+      errors.email = 'Email is required.';
     } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-      errors.email = 'Enter a valid email';
+      errors.email = 'Enter a valid email.';
     }
-    if (!formValues.password.trim()) errors.password = 'Password is required';
-    if (!formValues.terms) errors.terms = 'You must agree to the terms';
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
-
-  // Validate Login form
-  const validateLoginForm = () => {
-    const errors = {};
-    if (!loginValues.email.trim()) {
-      errors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(loginValues.email)) {
-      errors.email = 'Enter a valid email';
-    }
-    if (!loginValues.password.trim()) errors.password = 'Password is required';
-    if (!loginValues.terms) errors.terms = 'You must agree to the terms';
+    if (!formValues.password.trim()) errors.password = 'Password is required.';
+    if (!formValues.terms) errors.terms = 'You must agree to the terms.';
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -77,29 +88,15 @@ const Navbar = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (isLoginForm) {
-      if (validateLoginForm()) {
-        alert('Login successful!');
-        toggleModal();
-      }
-    } else {
-      if (validateSignInForm()) {
-        alert('Account created successfully!');
-        toggleModal();
-      }
+    if (validateForm()) {
+      alert(isLoginForm ? 'Login successful!' : 'Account created successfully!');
+      toggleModal();
     }
   };
 
-  // Switch to Login form
-  const showLoginForm = () => {
-    setIsLoginForm(true);
-    resetForm();
-  };
-
-  // Switch to Sign In form
-  const showSignInForm = () => {
-    setIsLoginForm(false);
+  // Switch between Login and Sign In forms
+  const toggleFormType = () => {
+    setIsLoginForm(!isLoginForm);
     resetForm();
   };
 
@@ -115,10 +112,60 @@ const Navbar = () => {
           <li><Link smooth to="#contact-us">Contact Us</Link></li>
         </ul>
         <div className="navbar-actions">
-          <img src="/images/cart.jpg" alt="Cart" className="cart-icon" />
+        <img
+          src="/images/cart.jpg"
+          alt="Cart"
+          className="cart-icon"
+          onClick={toggleCart}
+          />
           <button className="signin-btn" onClick={toggleModal}>Sign In</button>
         </div>
       </nav>
+      {isCartOpen && (
+  <div className="cart-container">
+    <h2>Your Cart</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {cartItems.map((item) => (
+          <tr key={item.id}>
+            <td><img src={item.image} alt={item.title} className="cart-item-image" /></td>
+            <td>{item.title}</td>
+            <td>{item.price}</td>
+            <td>{item.quantity}</td>
+            <td>{item.price * item.quantity}</td>
+            <td>
+              <button onClick={() => removeItem(item.id)}>Remove</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    {/* Horizontal Line */}
+    <hr className="cart-divider" />
+
+    {/* Cart Summary */}
+    <div className="cart-summary">
+      <p>Subtotal: ₹{subtotal}</p>
+      <p>Delivery Charges: ₹{deliveryCharges}</p>
+      <p>Grand Total: ₹{grandTotal}</p>
+    </div>
+
+    <button className="close-cart-btn" onClick={toggleCart}>
+      Close
+    </button>
+  </div>
+)}
 
       {/* Modal */}
       {isModalOpen && (
@@ -127,7 +174,7 @@ const Navbar = () => {
             <form onSubmit={handleSubmit} className="modal-form">
               <h2 className="modal-title">{isLoginForm ? 'Login' : 'Sign In'}</h2>
 
-              {/* Form Inputs */}
+              {/* Input fields */}
               {!isLoginForm && (
                 <>
                   <input
@@ -144,7 +191,7 @@ const Navbar = () => {
               <input
                 type="email"
                 name="email"
-                value={isLoginForm ? loginValues.email : formValues.email}
+                value={formValues.email}
                 onChange={handleInputChange}
                 placeholder="Enter your email"
                 className="modal-input"
@@ -153,19 +200,19 @@ const Navbar = () => {
               <input
                 type="password"
                 name="password"
-                value={isLoginForm ? loginValues.password : formValues.password}
+                value={formValues.password}
                 onChange={handleInputChange}
                 placeholder="Enter your password"
                 className="modal-input"
               />
               {formErrors.password && <p className="error-text">{formErrors.password}</p>}
 
-              {/* Terms & Conditions */}
+              {/* Terms */}
               <div className="checkbox-container">
                 <input
                   type="checkbox"
                   name="terms"
-                  checked={isLoginForm ? loginValues.terms : formValues.terms}
+                  checked={formValues.terms}
                   onChange={handleInputChange}
                   id="terms"
                 />
@@ -175,23 +222,21 @@ const Navbar = () => {
               </div>
               {formErrors.terms && <p className="error-text">{formErrors.terms}</p>}
 
-              {/* Submit Button */}
+              {/* Submit */}
               <button type="submit" className="modal-btn">
                 {isLoginForm ? 'Login' : 'Create Account'}
               </button>
 
-              {/* Toggle Form Link */}
+              {/* Toggle form */}
               <p className="modal-login">
-                {isLoginForm
-                  ? "Create a new account? "
-                  : "Already have an account? "}
-                <span onClick={isLoginForm ? showSignInForm : showLoginForm}>
+                {isLoginForm ? 'Don’t have an account? ' : 'Already have an account? '}
+                <span onClick={toggleFormType}>
                   {isLoginForm ? 'Sign In' : 'Login'} here
                 </span>
               </p>
             </form>
 
-            {/* Close Button */}
+            {/* Close button */}
             <button className="close-modal-btn" onClick={toggleModal}>
               ×
             </button>
