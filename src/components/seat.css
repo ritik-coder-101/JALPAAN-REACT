@@ -1,0 +1,138 @@
+.seat-layout {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .seat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 50px);
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+  }
+  
+  .seat {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .seat.vacant {
+    background-color: grey;
+  }
+  
+  .seat.booked {
+    background-color: red;
+    cursor: not-allowed;
+  }
+  
+  .seat.selected {
+    background-color: green;
+  }
+  
+  .close-seat-layout {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .close-seat-layout:hover {
+    background-color: #0056b3;
+  }
+
+  .dropdown-actions1 {
+    display: flex; /* Enables Flexbox */
+    justify-content: center; /* Centers the button horizontally */
+    margin-top: 20px; /* Optional: adds some space above the button */
+  }
+
+  .back-btn,.choose-seat-btn {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    background-color: #e68a00;
+  }
+
+  .Ready-text {
+    color: green;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .warning-text {
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  /* Default background (for when the page is loaded initially) */
+.time-selection-container {
+    transition: background-image 0.3s ease-in-out; /* Smooth transition */
+  }
+  
+  /* Day background */
+  .day-background {
+    background-image: url('d:\React-pro\myproject\public\images\sunny.jpg');
+    background-size: cover;
+    background-position: center;
+    height: auto; /* Adjust height as needed */
+  }
+  
+  /* Night background */
+  .night-background {
+    background-image: url('d:\React-pro\myproject\public\images\night.jpg');
+    background-size: cover;
+    background-position: center;
+    height: auto; /* Adjust height as needed */
+  }
+  
+  /* Additional styling for buttons */
+  .time-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .time-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+  }
+  
+  .day-selected {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background for day */
+  }
+  
+  .night-selected {
+    background-color: rgba(0, 0, 0, 0.2); /* Dark background for night */
+  }
+  
