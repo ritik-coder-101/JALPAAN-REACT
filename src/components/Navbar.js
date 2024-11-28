@@ -36,6 +36,10 @@ const Navbar = () => {
     { id: 14, status: 'vacant' },
     { id: 15, status: 'vacant' },
     { id: 16, status: 'vacant' },
+    { id: 17, status: 'vacant' },
+    { id: 18, status: 'vacant' },
+    { id: 19, status: 'booked' },
+    { id: 20, status: 'booked' },
   ]);
 
   const toggleSeatSelection = (id) => {
